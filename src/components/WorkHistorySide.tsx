@@ -1,32 +1,6 @@
-import { useEffect, useRef, type Dispatch, type SetStateAction } from 'react';
-
-const AddWorkHistory = ({
-    openWorkHistory,
-    setOpenWorkHistory,
-}: {
-    openWorkHistory: boolean;
-    setOpenWorkHistory: Dispatch<SetStateAction<boolean>>;
-}) => {
-    const formRef = useRef<HTMLFormElement>(null);
-
-    useEffect(() => {
-        const closeSidebar = (event: MouseEvent) => {
-            if (
-                formRef.current &&
-                !formRef.current.contains(event.target as Node)
-            ) {
-                setOpenWorkHistory(false);
-            }
-        };
-        document.addEventListener('mousedown', closeSidebar);
-        return () => document.removeEventListener('mousedown', closeSidebar);
-    }, []);
-
+const WorkHistorySide = () => {
     return (
-        <form
-            ref={formRef}
-            className={`fixed top-0 right-0 z-100 flex h-screen w-[700px] flex-col gap-4 bg-white p-12 shadow-2xl ${openWorkHistory ? 'translate-x-0' : 'translate-x-full'} transition-all duration-300`}
-        >
+        <form className="h-full w-full">
             <h1 className="text-2xl font-bold">ประวัติการทำงานของคุณ</h1>
             <div className="mt-4 flex flex-col gap-2">
                 <label htmlFor="position" className="text-lg font-bold">
@@ -104,17 +78,8 @@ const AddWorkHistory = ({
                     className="outline-normal-active max-h-[300px] min-h-[300px] rounded-lg border-2 border-stone-500 px-4 py-4 outline-offset-4"
                 />
             </div>
-            <button
-                onClick={() => {
-                    setOpenWorkHistory(false);
-                }}
-                type="button"
-                className="absolute top-12 right-12 aspect-square h-8 cursor-pointer text-xl text-red-500 transition-all hover:scale-110"
-            >
-                <i className="fa-solid fa-xmark"></i>
-            </button>
         </form>
     );
 };
 
-export default AddWorkHistory;
+export default WorkHistorySide;
