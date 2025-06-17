@@ -5,15 +5,15 @@ const EmployeeRegisterPage = () => {
     const [showPass, setShowPass] = useState(false);
     return (
         <main className="flex h-screen w-full">
-            <section className="relative w-1/2 bg-white">
+            <section className="relative w-1/2 bg-white lg:inline-block hidden">
                 <img
                     src={'/public/image/register_background.png'}
                     alt="login background"
                     className="h-full w-full object-cover"
                 />
             </section>
-            <section className="flex w-1/2 flex-col items-center justify-center bg-white p-4">
-                <h1 className="text-4xl font-bold">เข้าสู่ระบบ</h1>
+            <section className="flex lg:w-1/2 w-full flex-col items-center justify-center bg-white p-4 min-w-[300px]">
+                <h1 className="text-4xl font-bold">ลงทะเบียน</h1>
                 <p className="mt-2 text-lg font-bold">สำหรับผู้หางาน</p>
                 <form
                     action=""

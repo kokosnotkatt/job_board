@@ -6,7 +6,7 @@ const EmployeeLoginPage = () => {
 
     return (
         <main className="flex h-screen w-full">
-            <section className="flex w-1/2 flex-col items-center justify-center bg-white p-4">
+            <section className="flex lg:w-1/2 w-full flex-col items-center justify-center bg-white p-4 min-w-[300px]">
                 <h1 className="text-4xl font-bold">เข้าสู่ระบบ</h1>
                 <p className="mt-2 text-lg font-bold">สำหรับผู้หางาน</p>
                 <form
@@ -67,8 +67,11 @@ const EmployeeLoginPage = () => {
                     </Link>
                 </p>
             </section>
-            <section className='w-1/2 h-full bg-black'>
-                <img src='/public/image/login_background.png' className='h-full w-full object-cover object-top-left'/>
+            <section className="h-full w-1/2 bg-black hidden lg:inline-block">
+                <img
+                    src="/public/image/login_background.png"
+                    className="h-full w-full object-cover object-top-left"
+                />
             </section>
         </main>
     );

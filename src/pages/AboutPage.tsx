@@ -19,6 +19,7 @@ const AboutPage = () => {
                         <p>ผู้ช่วยกรรมการผู้จัดการ</p>
                     </div>
                     <p>เวลาทำการ : จันทร์ - ศุกร์ 8:30 น. - 17:00 น.</p>
+                    <div className="w-full aspect-square bg-stone-200 rounded-xl"></div>
                 </div>
                 <div className="w-1/2">
                     <h2 className="text-lg font-bold">
