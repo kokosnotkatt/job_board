@@ -1,123 +1,222 @@
-import { useState } from 'react';
-import WorkHistorySide from '../components/WorkHistorySide';
-import Sidebar from '../components/Sidebar';
-import EducationSide from '../components/EducationSide';
+import React, { useState } from 'react';
+import {
+  ProfileHeader,
+  ProfileCard,
+  SkillsCard,
+  FileUploadCard,
+  VideoUploadCard,
+  
+} from '../components';
+interface UserData {
+  name: string;
+  position: string;
+  company?: string;
+  skills?: string;
+  email: string;
+  phone: string;
+  about: string;
+  experience: string;
+  education: string;
+  projects: string;
+  achievements: string;
+  customSkills: Skill[];
+  videoUrl: string | null;
+  profileImage: string;
+  certificateFiles: FileData[];
+  contactFiles: FileData[];
+}
+interface Skill {
+  name: string;
+  level: number;
+}
+interface FileData {
+  name: string;
+  url: string;
+  type: string;
+}
 
-const ProfilePage = () => {
-    const [openPSIF, setOpenPSIF] = useState(false);
-    const [openWHS, setOpenWHS] = useState(false);
-    const [openEDS, setOpenEDS] = useState(false);
-    const [openLC, setOpenLC] = useState(false);
-    const [openSkill, setOpenSkill] = useState(false);
+const ProfilePage: React.FC = () => {
+  const [userData, setUserData] = useState<UserData>({
+    name: '',
+    position: '',
+    company: '',
+    skills: '',
+    email: '',
+    phone: '',
+    about: 'เพิ่มข้อมูลส่วนตัวของคุณ',
+    experience: 'เพิ่มประวัติการทำงานเพื่อให้บริษัททราบถึงประสบการณ์ของคุณ',
+    education: 'แจ้งให้บริษัททราบเกี่ยวกับข้อมูลการศึกษาของคุณ',
+    projects: 'แสดงข้อมูลทีเกี่ยวข้องเพิ่มใบอนุญาตหรือประกาศนียบัตรที่เกี่ยวข้องกับงาน',
+    achievements: 'เพิ่มรายละเอียดการฝึกงานเพื่อบอกว่าคุณต้องการฝึกเป็นเวลานานเท่าใด',
+    customSkills: [
+      
+    ],
+    videoUrl: null,
+    profileImage: 'https://images.unsplash.com/photo-1494790108755-2616b612b567?w=150&h=150&fit=crop&crop=face',
+    certificateFiles: [],
+    contactFiles: []
+  });
 
-    return (
-        <main className="w-full px-48 py-8">
-            <section className="to-darker relative flex h-[300px] w-full gap-16 rounded-2xl bg-gradient-to-r from-black p-4">
-                <div className="text-darker flex aspect-square h-full items-center justify-center rounded-lg bg-white text-7xl">
-                    <i className="fa-solid fa-user"></i>
-                </div>
-                <div className="flex flex-col justify-center gap-4 text-lg text-white">
-                    <h1 className="text-3xl font-bold">ชื่อ</h1>
-                    <p>ตำแหน่งงาน</p>
-                    <p>มหาลัย</p>
-                    <p>อีเมล</p>
-                </div>
-                <button className="absolute right-4 bottom-4 cursor-pointer rounded-lg bg-white px-12 py-2 text-lg font-bold transition-all duration-300 hover:scale-105">
-                    แก้ไข
-                </button>
-            </section>
-            <section className="relative flex w-full flex-col gap-8 p-4">
-                <div className="flex flex-col gap-2">
-                    <h1 className="text-2xl font-bold">ข้อมูลส่วนตัว</h1>
-                    <p>เพิ่มข้อมูลส่วนตัวโดยย่อ เพื่อแนะนำตัว</p>
-                    <button
-                        className="border-normal text-normal w-[10%] cursor-pointer rounded-lg border px-4 py-2 transition-all duration-300 hover:scale-105"
-                        onClick={() => setOpenPSIF(!openPSIF)}
-                    >
-                        เพิ่มข้อมูลส่วนตัว
-                    </button>
-                </div>
-                <div className="flex flex-col gap-2">
-                    <h1 className="text-2xl font-bold">ประวัติการทำงาน</h1>
-                    <p>
-                        เพิ่มประวัติการทำงานเพื่อให้บริษัททราบถึงประสบการณ์ของคุณ
-                    </p>
-                    <button
-                        className="border-normal text-normal w-[15%] cursor-pointer rounded-lg border px-4 py-2 transition-all duration-300 hover:scale-105"
-                        onClick={() => {
-                            setOpenWHS(!openWHS);
-                        }}
-                    >
-                        เพิ่มประวัติการทำงาน
-                    </button>
-                </div>
-                <div className="flex flex-col gap-2">
-                    <h1 className="text-2xl font-bold">ข้อมูลการศึกษา</h1>
-                    <p>แจ้งให้บริษัททราบเกี่ยวกับข้อมูลการศึกษาของคุณ</p>
-                    <button
-                        className="border-normal text-normal w-[15%] cursor-pointer rounded-lg border px-4 py-2 transition-all duration-300 hover:scale-105"
-                        onClick={() => setOpenEDS(!openEDS)}
-                    >
-                        เพิ่มข้อมูลการศึกษา
-                    </button>
-                </div>
-                <div className="flex flex-col gap-2">
-                    <h1 className="text-2xl font-bold">
-                        ใบอนุญาตหรือประกาศนียบัตร
-                    </h1>
-                    <p>
-                        แสดงข้อมูลทีเกี่ยวข้องเพิ่มใบอนุญาตหรือประกาศนียบัตรที่เกี่ยวข้องกับงาน
-                    </p>
-                    <button
-                        className="border-normal text-normal w-[10%] cursor-pointer rounded-lg border px-4 py-2 transition-all duration-300 hover:scale-105"
-                        onClick={() => setOpenLC(!openLC)}
-                    >
-                        เพิ่มใบอนุญาต
-                    </button>
-                </div>
-                <div className="flex flex-col gap-2">
-                    <h1 className="text-2xl font-bold">ทักษะ</h1>
-                    <p>บอกให้บริษัททราบถึงทักษะความสามารถของคุณ</p>
-                    <button
-                        className="border-normal text-normal w-[10%] cursor-pointer rounded-lg border px-4 py-2 transition-all duration-300 hover:scale-105"
-                        onClick={() => setOpenSkill(!openSkill)}
-                    >
-                        เพิ่มทักษะ
-                    </button>
-                </div>
-                <div className="flex flex-col gap-2">
-                    <h1 className="text-2xl font-bold">คลิปวิดีโอ</h1>
-                    <p>
-                        คลิปวิดีโอแนะนำตัวคุณเองสั้นๆเกี่ยวกับงานที่ทำและทักษะความสามารถที่คุณมี
-                    </p>
-                    <button className="border-normal text-normal w-[10%] cursor-pointer rounded-lg border px-4 py-2 transition-all duration-300 hover:scale-105">
-                        อัปโหลดคลิปวิดีโอ
-                    </button>
-                </div>
-                <div className="absolute top-4 right-4 flex w-fit flex-col gap-2 text-end">
-                    <p className="text-2xl font-bold">ความสมบูรณ์ของโปรไฟล์</p>
-                    <div className="h-4 w-full rounded-full bg-stone-200"></div>
-                    <p className="text-stone-500">0%</p>
-                </div>
-            </section>
-            {/* Sidebar */}
-            <Sidebar openSidebar={openPSIF} setOpenSidebar={setOpenPSIF}>
-                <div>ยังไม่ได้ใส่</div>
-            </Sidebar>
-            <Sidebar openSidebar={openWHS} setOpenSidebar={setOpenWHS}>
-                <WorkHistorySide />
-            </Sidebar>
-            <Sidebar openSidebar={openEDS} setOpenSidebar={setOpenEDS}>
-                <EducationSide />
-            </Sidebar>
-            <Sidebar openSidebar={openLC} setOpenSidebar={setOpenLC}>
-                <div>ใบอนุญาติ</div>
-            </Sidebar>
-            <Sidebar openSidebar={openSkill} setOpenSidebar={setOpenSkill}>
-                <div>ทักษะ</div>
-            </Sidebar>
-        </main>
-    );
+  const handleUpdateProfile = (profileData: Partial<UserData>): void => {
+    setUserData(prev => ({
+      ...prev,
+      ...profileData
+    }));
+  };
+
+  const handleUpdateCard = (cardId: string, content: string): void => {
+    setUserData(prev => ({
+      ...prev,
+      [cardId]: content
+    }));
+  };
+
+  const handleUpdateSkills = (newSkills: Skill[]): void => {
+    setUserData(prev => ({
+      ...prev,
+      customSkills: newSkills
+    }));
+  };
+
+  const handleVideoUpload = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const file = e.target.files?.[0];
+    if (file && file.type.startsWith('video/')) {
+      const videoURL = URL.createObjectURL(file);
+      setUserData(prev => ({ ...prev, videoUrl: videoURL }));
+    }
+  };
+
+  const handleCertificateUpload = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const files = e.target.files;
+    if (files) {
+      const fileArray = Array.from(files);
+      const fileData: FileData[] = fileArray.map(file => ({
+        name: file.name,
+        url: URL.createObjectURL(file),
+        type: file.type
+      }));
+      setUserData(prev => ({ 
+        ...prev, 
+        certificateFiles: [...prev.certificateFiles, ...fileData] 
+      }));
+    }
+  };
+
+  const handleContactFileUpload = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const files = e.target.files;
+    if (files) {
+      const fileArray = Array.from(files);
+      const fileData: FileData[] = fileArray.map(file => ({
+        name: file.name,
+        url: URL.createObjectURL(file),
+        type: file.type
+      }));
+      setUserData(prev => ({ 
+        ...prev, 
+        contactFiles: [...prev.contactFiles, ...fileData] 
+      }));
+    }
+  };
+
+  const removeCertificateFile = (index: number): void => {
+    const updatedFiles = userData.certificateFiles.filter((_, i) => i !== index);
+    setUserData(prev => ({ ...prev, certificateFiles: updatedFiles }));
+  };
+
+  const removeContactFile = (index: number): void => {
+    const updatedFiles = userData.contactFiles.filter((_, i) => i !== index);
+    setUserData(prev => ({ ...prev, contactFiles: updatedFiles }));
+  };
+
+  const calculateCompletionRate = (): number => {
+    const fields: (keyof UserData)[] = ['name', 'position', 'email', 'phone', 'about', 'experience'];
+    const filledFields = fields.filter(field => {
+      const value = userData[field];
+      return typeof value === 'string' && value.trim() !== '';
+    });
+    return Math.round((filledFields.length / fields.length) * 100);
+  };
+
+  const skills = userData.customSkills || [];
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <ProfileHeader 
+        user={userData} 
+        completionRate={calculateCompletionRate()} 
+        onUpdateProfile={handleUpdateProfile}
+
+      />
+      
+      <div className="max-w-7xl mx-auto px-6 py-6">
+        <div className="grid grid-cols-2 gap-6">
+          <div className="space-y-6">
+            <ProfileCard 
+              title="ข้อมูลส่วนตัวของคุณ" 
+              content={userData.about || "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."} 
+              onEdit={handleUpdateCard}
+              cardId="about"
+            />
+            
+            <ProfileCard 
+              title="ประสบการณ์การทำงานของคุณ" 
+              content={userData.experience || "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."} 
+              onEdit={handleUpdateCard}
+              cardId="experience"
+            />
+            
+            <ProfileCard 
+              title="ข้อมูลการศึกษา" 
+              content={userData.education || "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."} 
+              onEdit={handleUpdateCard}
+              cardId="education"
+            />
+            
+            <FileUploadCard
+              title="รางวัลหรือใบประกาศนียบัตร"
+              files={userData.certificateFiles}
+              onFileUpload={handleCertificateUpload}
+              onRemoveFile={removeCertificateFile}
+              accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
+            />
+          </div>
+          
+          <div className="space-y-6">
+            <VideoUploadCard 
+              videoUrl={userData.videoUrl}
+              onVideoUpload={handleVideoUpload}
+            />
+
+            <FileUploadCard
+              title="เรซูเม่"
+              files={userData.contactFiles}
+              onFileUpload={handleContactFileUpload}
+              onRemoveFile={removeContactFile}
+              accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
+            />
+            
+            <SkillsCard skills={skills} onUpdateSkills={handleUpdateSkills} />
+
+            <ProfileCard 
+              title="ผลงาน/โปรเจค" 
+              content={userData.projects || "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."} 
+              onEdit={handleUpdateCard}
+              cardId="projects"
+            />
+            
+            <ProfileCard 
+              title="รายละเอียดเพิ่มเติม" 
+              content={userData.achievements || "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."} 
+              onEdit={handleUpdateCard}
+              cardId="achievements"
+            />
+          </div>
+        </div>
+      </div>
+      
+      
+    </div>
+  );
 };
 
 export default ProfilePage;

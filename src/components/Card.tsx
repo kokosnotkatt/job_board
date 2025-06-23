@@ -24,7 +24,8 @@ const Card = ({
     setShowPopup,
 }: CardType) => {
     return (
-        <div className="bg-light-hover h-88 w-[30%] min-w-[500px] cursor-pointer rounded-xl p-8 shadow-xl transition-all duration-300 hover:scale-[102%]">
+        
+        <div className="bg-[#f0f4f4] h-88 w-[30%] min-w-[500px] cursor-pointer rounded-xl p-8 shadow-xl transition-all duration-300 hover:scale-[102%]">
             <div className="flex w-full items-center justify-between text-sm">
                 <p>กำลังมองหางาน</p>
                 <p>{createdAt}</p>
@@ -56,7 +57,7 @@ const Card = ({
                     <p>{department}</p>
                 </li>
                 <li className="flex w-full">
-                    <p className="w-1/3">สกิล</p>
+                    <p className="w-1/3">สกิลที่มี</p>
                     <p>
                         {skill.map((s, index) => (
                             <span

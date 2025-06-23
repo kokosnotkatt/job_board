@@ -4,47 +4,53 @@ const Navbar = () => {
     const { pathname } = useLocation();
 
     return (
-        <nav className="bg-normal flex h-[100px] w-full items-center justify-between px-12">
+        <div className=" bg-[#00a991] ">
+        <nav className="container  mx-auto max-w-[1800px] relative h-auto p-10 flex flex-col md:flex-row md:justify-between md:items-center md:h-[150px]">
             <img
                 src="/ideatrade.svg"
                 alt="ideatrade logo"
-                className="h-full"
+                className="h-31 w-41 mr-4 pr-4"
             />
-            <div className="font-noto-sans flex gap-16 text-xl font-bold text-white">
+            <div className=" flex flex-col my-5 md:flex-row mr-68 pr-68 font-semibold text-xl  ">
                 <Link
                     to={'/'}
-                    className={`relative transition-all after:absolute after:right-1/2 after:bottom-0 after:h-[2px] after:w-full after:translate-x-1/2 after:scale-0 after:rounded-full after:bg-white after:transition-all after:duration-300 after:content-[""] hover:after:scale-100 ${pathname === '/' && 'after:scale-100'}`}
+                    className={`text-white p-12 hover:text-black hover:underline transition-all ${pathname === '/' && 'after:scale-100'}`}
                 >
                     ค้นหานักศึกษาฝึกงาน
                 </Link>
                 <Link
                     to={'/profile'}
-                    className={`relative transition-all after:absolute after:right-1/2 after:bottom-0 after:h-[2px] after:w-full after:translate-x-1/2 after:scale-0 after:rounded-full after:bg-white after:transition-all after:duration-300 after:content-[""] hover:after:scale-100 ${pathname === '/profile' && 'after:scale-100'}`}
+                    className={`text-white p-12 hover:text-black hover:underline transition-all ${pathname === '/profile' && 'after:scale-100'}`}
                 >
                     โปรไฟล์
                 </Link>
                 <Link
                     to={'/about'}
-                    className={`relative transition-all after:absolute after:right-1/2 after:bottom-0 after:h-[2px] after:w-full after:translate-x-1/2 after:scale-0 after:rounded-full after:bg-white after:transition-all after:duration-300 after:content-[""] hover:after:scale-100 ${pathname === '/about' && 'after:scale-100'}`}
+                    className={`text-white p-12 hover:text-black hover:underline transition-all ${pathname === '/about' && 'after:scale-100'}`}
                 >
                     เกี่ยวกับเรา
                 </Link>
             </div>
-            <div className="text-normal flex gap-8">
+            <div className=" flex flex-col my-5 md:flex-row">
+               <div className="my-2 md:mx-5"> 
                 <Link
                     to={'/auth/employee/login'}
-                    className="cursor-pointer rounded-full bg-white px-4 py-2 font-bold transition-all duration-300 hover:scale-105"
+                    className="text-xl  py-3 px-6 bg-white rounded-full hover:bg-black hover:text-white transform transition-all"
                 >
                     เข้าสู่ระบบ
                 </Link>
+                </div>
+                <div className="my-2 md:mx-5">
                 <Link
                     to={'/auth/employee/register'}
-                    className="cursor-pointer rounded-full bg-white px-4 py-2 font-bold transition-all duration-300 hover:scale-105"
+                    className="text-white text-xl py-3 px-6 bg-black rounded-full hover:bg-white hover:text-black transform transition-all"
                 >
-                    เข้าสู่ระบบบริษัท
+                    บริษัทเข้าสู่ระบบ
                 </Link>
+               </div>
             </div>
         </nav>
+        </div>
     );
 };
 

@@ -7,6 +7,9 @@ const EmployeeLoginPage = () => {
     return (
         <main className="flex h-screen w-full">
             <section className="flex lg:w-1/2 w-full flex-col items-center justify-center bg-white p-4 min-w-[300px]">
+                <Link to={'/'} className="absolute top-8 left-8" >
+                    <img src={'/logo-2.png'} alt="login-ideatrade" className="w-[140px] h-[140px]" />
+                </Link>
                 <h1 className="text-4xl font-bold">เข้าสู่ระบบ</h1>
                 <p className="mt-2 text-lg font-bold">สำหรับผู้หางาน</p>
                 <form
@@ -69,7 +72,7 @@ const EmployeeLoginPage = () => {
             </section>
             <section className="h-full w-1/2 bg-black hidden lg:inline-block">
                 <img
-                    src="/public/image/login_background.png"
+                    src="/public/image/login-img.jpg"
                     className="h-full w-full object-cover object-top-left"
                 />
             </section>

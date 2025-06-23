@@ -1,5 +1,6 @@
 const EducationSide = () => {
     return (
+        
         <form className="h-full w-full">
             <h1 className="text-2xl font-bold">เพิ่มข้อมูลการศึกษา</h1>
             <div className="mt-4 flex flex-col gap-2">
@@ -47,6 +48,7 @@ const EducationSide = () => {
                 />
             </div>
         </form>
+        
     );
 };
 

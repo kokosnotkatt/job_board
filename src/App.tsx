@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import Card from './components/Card';
 import FilterSection from './components/FilterSection';
-
+import { Filter } from "lucide-react";
 interface CardType {
-    id: string;
-    position: string;
-    period: string;
-    type: string;
-    education: string;
-    department: string;
-    skill: string[];
-    createdAt: string;
+  id: string;
+  position: string;
+  period: string;
+  type: string;
+  education: string;
+  department: string;
+  skill: string[];
+  createdAt: string;
 }
 
 const applications: CardType[] = [
@@ -226,22 +226,101 @@ const applications: CardType[] = [
     },
 ];
 
+
+//ระบบเปลี่ยนหน้า
 function App() {
-    const [showPop, setShowPop] = useState(false);
+  const [showPop, setShowPop] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
+ 
+  const totalPages = Math.ceil(applications.length / itemsPerPage);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // scroll กลับบนสุดเมื่อเปลี่ยนหน้า
+  };
+
+  const currentItems = applications.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  const Pagination = () => {
+    const getPageNumbers = () => {
+      const pages = [];
+      const maxVisible = 5;
+
+      if (totalPages <= maxVisible) {
+        for (let i = 1; i <= totalPages; i++) {
+          pages.push(i);
+        }
+      } else {
+        if (currentPage <= 3) {
+          pages.push(1 , 2 , 3 , 4 , 5 ,  '...');
+        } else if (currentPage >= totalPages - 2) {
+          pages.push('...', totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
+        } else {
+          pages.push('...', currentPage - 1, currentPage, currentPage + 1, '...');
+        }
+      }
+
+      return pages;
+    };
 
     return (
-        <div className="w-full">
-            <FilterSection />
-            <section className="w-full p-16">
-                <h1 className="text-2xl font-bold">หางาน</h1>
-                <div className="mt-8 flex w-full flex-wrap items-stretch justify-center gap-8 [&>div:nth-child(3n+1)_.third]:bg-black [&>div:nth-child(3n+2)_.third]:bg-orange-600 [&>div:nth-child(3n+3)_.third]:bg-blue-400">
-                    {applications.map(app => (
-                        <Card {...app} setShowPopup={setShowPop} />
-                    ))}
-                </div>
-            </section>
-        </div>
+      <div className="flex justify-center items-center gap-2 mt-20 mb-20 pt-20 tb-20 ">
+        {getPageNumbers().map((page, index) => (
+          <button
+            key={index}
+            onClick={() => typeof page === 'number' ? handlePageChange(page) : null}
+            disabled={typeof page !== 'number'}
+            className={` w-10 h-10 rounded-full flex items-center justify-center font-medium transition-colors ${
+              page === currentPage
+                ? 'bg-[#00a991] text-black'
+                : typeof page === 'number'
+                ? 'bg-gray-100 text-black hover:bg-gray-200'
+                : 'text-gray-400 cursor-default'
+            }`}
+          >
+            {page}
+          </button>
+        ))}
+      </div>
     );
+  };
+
+  return (
+    <div className="w-full">
+    
+      <FilterSection />
+      <section className="w-full p-16">
+        <div className="px-6 py-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-3xl font-bold text-black ml-9">
+              นักศึกษาหาที่ฝึกงาน
+            </h2>
+            <div className="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-md border-2 mr-9">
+              <Filter className="w-4 h-4" />
+              <select className="bg-black text-white focus:outline-none">
+                <option>เรียงลำดับตาม : ทั้งหมด</option>
+                <option>เรียงลำดับตาม : ล่าสุด</option>
+                <option>เรียงลำดับตาม : ยอดนิยม</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
+        <div className="mt-8 flex w-full flex-wrap items-stretch justify-center gap-8 [&>div:nth-child(3n+1)_.third]:bg-black [&>div:nth-child(3n+2)_.third]:bg-orange-600 [&>div:nth-child(3n+3)_.third]:bg-blue-400">
+          {currentItems.map((app) => (
+            <Card key={app.id} {...app} setShowPopup={setShowPop} />
+          ))}
+        </div>
+        {/* ✅ แสดง Pagination */}
+        <Pagination />   
+      </section>
+    </div>
+    
+  );
 }
 
 export default App;

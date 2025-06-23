@@ -7,12 +7,15 @@ const EmployeeRegisterPage = () => {
         <main className="flex h-screen w-full">
             <section className="relative w-1/2 bg-white lg:inline-block hidden">
                 <img
-                    src={'/public/image/register_background.png'}
+                    src={'/public/image/register-img.jpg'}
                     alt="login background"
                     className="h-full w-full object-cover"
                 />
             </section>
-            <section className="flex lg:w-1/2 w-full flex-col items-center justify-center bg-white p-4 min-w-[300px]">
+            <div className="flex lg:w-1/2 w-full flex-col items-center justify-center bg-white p-4 min-w-[300px]">
+                  <Link to={'/'} className="absolute top-8 right-8" >
+                    <img src={'/logo-2.png'} alt="login-ideatrade" className="w-[140px] h-[140px]" />
+                  </Link>
                 <h1 className="text-4xl font-bold">ลงทะเบียน</h1>
                 <p className="mt-2 text-lg font-bold">สำหรับผู้หางาน</p>
                 <form
@@ -80,7 +83,7 @@ const EmployeeRegisterPage = () => {
                         เข้าสู่ระบบ
                     </Link>
                 </p>
-            </section>
+            </div>
         </main>
     );
 };
