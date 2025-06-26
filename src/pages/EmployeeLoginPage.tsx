@@ -12,8 +12,8 @@ const EmployeeLoginPage = () => {
                 </Link>
                 <h1 className="text-4xl font-bold">เข้าสู่ระบบ</h1>
                 <p className="mt-2 text-lg font-bold">สำหรับผู้หางาน</p>
-                <form
-                    action=""
+                <form 
+                    action=""    
                     className="mt-8 flex w-full max-w-[400px] flex-col gap-8"
                 >
                     <div className="relative h-fit w-full text-stone-500 placeholder:text-stone-500">

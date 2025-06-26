@@ -8,6 +8,7 @@ import AboutPage from './pages/AboutPage.tsx';
 import ProfilePage from './pages/ProfilePage.tsx';
 import EmployeeLoginPage from './pages/EmployeeLoginPage.tsx';
 import EmployeeRegisterPage from './pages/EmployeeRegisterPage.tsx';
+import CompanyPage from './pages/CompanyPage.tsx';
 
 const router = createBrowserRouter([
     {
@@ -26,6 +27,16 @@ const router = createBrowserRouter([
             </MainLayout>
         ),
     },
+    {
+        path: '/profile/company',
+        element: (
+            <MainLayout>
+                <CompanyPage />
+            </MainLayout>
+        ),
+    },
+    
+
     {
         path: '/about',
         element: (
